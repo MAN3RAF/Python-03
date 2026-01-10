@@ -28,5 +28,6 @@ try:
 
 	print(x1, y1, z1)
 
-except:
-	print(f"Error parsing coordinates: invalid literal for int() with base 10: '{position[0]}'")
+except ValueError as e:
+	print("Error parsing coordinates:", e)
+	print(f'Error details - Type: ValueError, Args: ("{e}",)')
