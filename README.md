@@ -5,7 +5,6 @@
 This repository contains Python exercises and implementations.
 
 ## 📄 Project Documentation
-
 You can view the project subject/documentation directly below or [download the PDF](./en.subject.pdf).
 
 ### View PDF
