@@ -4,7 +4,6 @@
 This repository contains Python exercises and implementations.
 
 ## 📄 Project Documentation
-
 You can view the project subject/documentation directly below or [download the PDF](./en.subject.pdf).
 
 ### View PDF
@@ -22,6 +21,7 @@ If the PDF doesn't display above, you can also view it using these methods:
 [📥 Download PDF](./en.subject.pdf)
 
 ## 📁 Repository Structure
+
 
 ```
 Python-03/
