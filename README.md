@@ -14,7 +14,6 @@ You can view the project subject/documentation directly below or [download the P
 </object>
 
 ### Alternative PDF Viewer
-
 If the PDF doesn't display above, you can also view it using these methods:
 
 [![View PDF](https://img.shields.io/badge/View-PDF-red?style=for-the-badge&logo=adobe)](https://github.com/MAN3RAF/Python-03/blob/main/en.subject.pdf)
