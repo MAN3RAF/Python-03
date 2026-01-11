@@ -65,9 +65,6 @@ def transaction(alice_inv: dict, bob_inv: dict, item: str, many: int) -> None:
     """Transfer items from Alice's inventory to Bob's inventory."""
     if alice_inv.get(item):
         item_quantity = alice_inv[item].get("quantity")
-        item_type = alice_inv[item].get("type")
-        item_rarity = alice_inv[item].get("rarity")
-        item_value = alice_inv[item].get("value")
         if many == 0:
            print("Error: Cannot give 0 items!")
         elif item_quantity >= many:
@@ -102,6 +99,37 @@ def transaction(alice_inv: dict, bob_inv: dict, item: str, many: int) -> None:
 	
     print(f"Bob {item}: {bob_qty}")
 
+def most_valuable(alice_inv, bob_inv):
+    print("=== Inventory Analytics ===")
+    alice_gold = bob_gold = alice_items = bob_items = 0
+    rare_items = []
+    for k, v in alice_inv.items():
+        gold = v.get("quantity") * v.get("value")
+        alice_gold += gold
+        alice_items += v.get("quantity")
+        if v.get("rarity") == "rare":
+            rare_items.append(k)
+    for k, v in bob_inv.items():
+        gold = v.get("quantity") * v.get("value")
+        bob_gold += gold
+        bob_items += v.get("quantity")
+        if v.get("rarity") == "rare":
+            rare_items.append(k)
+    
+    if bob_gold > alice_gold:
+        print(f"Most valuable player: Bob ({bob_gold} gold)")
+    elif alice_gold > bob_gold:
+        print(f"Most valuable player: Alice ({alice_gold} gold)")
+    
+    if bob_items > alice_items:
+        print(f"Most items: Bob ({bob_items} items)")
+    elif alice_items > bob_items:
+        print(f"Most items: Alice ({alice_items} items)")
+    
+    print("Rarest items:", end=' ')
+
+    print(", ".join(rare_items))
+
 
 print("=== Player Inventory System ===")
 
@@ -112,3 +140,5 @@ get_inventory_info(alice_inventory)
 transaction(alice_inventory, bob_inventory, item, 2)
 
 print()
+
+most_valuable(alice_inventory, bob_inventory)
