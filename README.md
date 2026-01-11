@@ -1,7 +1,6 @@
 # Python-03
 
 ## Project Overview
-
 This repository contains Python exercises and implementations.
 
 ## 📄 Project Documentation
