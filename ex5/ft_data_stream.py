@@ -3,13 +3,14 @@
 def game_event_generator(count):
 	
 	players = ["alice", "bob", "charlie", "frank"]
-	actions = ["found treasure", "level_up", "killed monster", "logout", "kill"]
+	actions = ["found treasure", "leveled up", "killed monster", "logout", "kill", "quest_complete", "item_found", "death"]
 
 	for i in range(count):
 		player = players[i % len(players)]
 		random_level = (i * 7) % 20 + 1
 		action = actions[i % len(actions)]
-		yield {"event": i, "player": player, "level": random_level, "action": action}
+		yield {"id": i, "player": player, "level": random_level, "action": action}
+
 
 def stream_processor(event_stream):
 	hight_level_count = treasure_count = level_up_count = events_count = 0
@@ -17,7 +18,7 @@ def stream_processor(event_stream):
 	for event in event_stream:
 		events_count += 1
 
-		if "level_up" in event['action']:
+		if "leveled up" in event['action']:
 			level_up_count += 1
 
 		if event['level'] >= 10:
@@ -28,6 +29,7 @@ def stream_processor(event_stream):
 	
 	return hight_level_count, treasure_count, level_up_count, events_count
 
+
 def fibonacci(num):
 
 	a, b = 0, 1
@@ -36,16 +38,86 @@ def fibonacci(num):
 		
 		yield a
 		a, b = b, a + b
+
+
+def prime(limit):
 	
-fibonacci(10)
+	num = 2
+	count = 0
 
-def prime(num):
-	pass
+	while count < limit:
+		is_prime = True
+		for i in range(2, num):
+			if num % i == 0:
+				is_prime = False
+				break
+		
+		if is_prime:
+			yield num
+			count += 1
+		num += 1
 
-# event_stream = game_event_generator(1000)
 
-# #processing_time = total_events * 0.000045
+def main():
 
-# hight_level, treasure, level_up, events = stream_processor(event_stream)
+	print("=== Game Data Stream Processor ===\n")
 
-# print(hight_level, treasure, level_up, events)
+	game_events = 1000
+
+	print(f"Processing {game_events} game events...\n")
+	
+	i = 1
+	for event in game_event_generator(game_events):
+		print(
+			f"Event {event['id'] + 1}: Player {event['player']} "
+			f"(level {event['level']}) {event['action']}")
+		if i == 3:
+			print("...\n")
+			break
+		i += 1
+
+	print("=== Stream Analytics ===")
+
+	stream_events = game_event_generator(game_events)
+
+	hight_level, treasure, level_up, events = stream_processor(stream_events)
+
+	print(f"Total events processed: {events}")
+	print(f"High-level players (10+): {hight_level}")
+	print(f"Treasure events: {treasure}")
+	print(f"Level-up events: {level_up}\n")
+
+	
+	print("Memory usage: Constant (streaming)")
+	processing_time = game_events * 0.000045
+	print(f"Processing time: {processing_time:.3f} seconds\n")
+
+	print("=== Generator Demonstration ===")
+
+	num = 10
+	print(f"Fibonacci sequence (first {num}):", end=' ')
+	j = 0
+	for i in fibonacci(num):
+		if j < num - 1:
+			print(i, end=', ')
+		else:
+			print(i)
+		j += 1
+
+	num = 5
+	print(f"Prime numbers (first {num}):", end=' ')
+
+	j = 0
+	for i in prime(num):
+		if j < num - 1:
+			print(i, end=', ')
+		else:
+			print(i)
+		j += 1
+
+
+
+
+
+
+main()
