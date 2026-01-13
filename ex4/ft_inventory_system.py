@@ -1,37 +1,37 @@
 
 alice_inventory = {
-    "sword":{
+    "sword": {
         "type": "weapon",
-        "rarity":"rare",
+        "rarity": "rare",
         "quantity": 1,
         "value": 500
-        },
-    "potion":{
+    },
+    "potion": {
         "type": "consumable",
         "rarity": "common",
         "quantity": 5,
         "value": 50
-        },
-    "shield":{
+    },
+    "shield": {
         "type": "armor",
         "rarity": "uncommon",
         "quantity": 1,
         "value": 200
-        }
     }
+}
 
 bob_inventory = {
-    "magic_ring":{
+    "magic_ring": {
         "type": "accessory",
         "rarity": "rare",
         "quantity": 1,
         "value": 300
-        }
+    }
 }
 
 
 def get_inventory_info(inventory: dict) -> None:
-    """Display detailed inventory information including items, values, and categories."""
+    """Display inventory info including items, values, and categories."""
     inventory_value = item_count = 0
     categories = {}
     print("\n=== Alice's Inventory ===")
@@ -43,23 +43,23 @@ def get_inventory_info(inventory: dict) -> None:
         item_value = v.get("value")
         inventory_value += sum_gold
         item_count += item_quantity
-        categories.update({item_type: item_quantity}) 
+        categories.update({item_type: item_quantity})
         print(
             f"{k} ({item_type}, {item_rarity}): "
             f"{item_quantity}x @ {item_value} gold each = {sum_gold} gold"
-            )
+        )
     print()
 
     print(f"Inventory value: {inventory_value} gold")
-    
+
     print(f"Item count: {item_count} items")
-    
+
     print("Categories:", end=' ')
     formatted = []
     for k, v in categories.items():
         formatted.append(f"{k}({v})")
     print(", ".join(formatted))
-	
+
     print()
 
 
@@ -68,37 +68,39 @@ def transaction(alice_inv: dict, bob_inv: dict, item: str, many: int) -> None:
     if alice_inv.get(item):
         item_quantity = alice_inv[item].get("quantity")
         if many == 0:
-           print("Error: Cannot give 0 items!")
+            print("Error: Cannot give 0 items!")
         elif item_quantity >= many:
             alice_inv[item]["quantity"] -= many
             if bob_inv.get(item):
                 bob_inv[item]["quantity"] += many
             else:
-                bob_inv.update({item: {k: v} for k, v in alice_inv[item].items()})
+                bob_inv.update({item: {k: v}
+                               for k, v in alice_inv[item].items()})
                 bob_inv[item]["quantity"] = many
             if alice_inv[item].get("quantity") == 0:
                 alice_inv.pop(item)
-            print(f"=== Transaction: Alice gives Bob {many} {item} ===\nTransaction successful!")
+            print(
+                f"=== Transaction: Alice gives Bob {many} {item} ==="
+                f"\nTransaction successful!")
         else:
             print(f"Error: '{item}' quantity not enough!")
     else:
         print("Error: alice doesn't have that item!")
     print()
     print("=== Updated Inventories ===")
-    
+
     if alice_inv.get(item):
         alice_qty = alice_inv[item].get("quantity")
     else:
         alice_qty = 0
-    
+
     if bob_inv.get(item):
         bob_qty = bob_inv[item].get("quantity")
     else:
         bob_qty = 0
 
-    
     print(f"Alice {item}: {alice_qty}")
-	
+
     print(f"Bob {item}: {bob_qty}")
 
 
@@ -118,17 +120,17 @@ def most_valuable(alice_inv, bob_inv):
         bob_items += v.get("quantity")
         if v.get("rarity") == "rare":
             rare_items.append(k)
-    
+
     if bob_gold > alice_gold:
         print(f"Most valuable player: Bob ({bob_gold} gold)")
     elif alice_gold > bob_gold:
         print(f"Most valuable player: Alice ({alice_gold} gold)")
-    
+
     if bob_items > alice_items:
         print(f"Most items: Bob ({bob_items} items)")
     elif alice_items > bob_items:
         print(f"Most items: Alice ({alice_items} items)")
-    
+
     print("Rarest items:", end=' ')
 
     print(", ".join(rare_items))

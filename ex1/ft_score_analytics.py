@@ -6,8 +6,8 @@ def main():
     print("=== Player Score Analytics ===")
     if program_len < 2:
         print(
-        "No scores provided. Usage: python3 "
-        "ft_score_analytics.py <score1> <score2> ..."
+            "No scores provided. Usage: python3 "
+            "ft_score_analytics.py <score1> <score2> ..."
         )
 
     else:
