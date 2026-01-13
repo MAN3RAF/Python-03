@@ -1,5 +1,4 @@
 
-
 def game_event_generator(count):
 	
 	players = ["alice", "bob", "charlie", "frank"]
@@ -114,10 +113,6 @@ def main():
 		else:
 			print(i)
 		j += 1
-
-
-
-
 
 
 main()

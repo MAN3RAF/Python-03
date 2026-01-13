@@ -29,6 +29,7 @@ bob_inventory = {
         }
 }
 
+
 def get_inventory_info(inventory: dict) -> None:
     """Display detailed inventory information including items, values, and categories."""
     inventory_value = item_count = 0
@@ -60,6 +61,7 @@ def get_inventory_info(inventory: dict) -> None:
     print(", ".join(formatted))
 	
     print()
+
 
 def transaction(alice_inv: dict, bob_inv: dict, item: str, many: int) -> None:
     """Transfer items from Alice's inventory to Bob's inventory."""
@@ -99,6 +101,7 @@ def transaction(alice_inv: dict, bob_inv: dict, item: str, many: int) -> None:
 	
     print(f"Bob {item}: {bob_qty}")
 
+
 def most_valuable(alice_inv, bob_inv):
     print("=== Inventory Analytics ===")
     alice_gold = bob_gold = alice_items = bob_items = 0
@@ -131,14 +134,18 @@ def most_valuable(alice_inv, bob_inv):
     print(", ".join(rare_items))
 
 
-print("=== Player Inventory System ===")
+def main():
+    print("=== Player Inventory System ===")
 
-item = "potion"
+    item = "potion"
 
-get_inventory_info(alice_inventory)
+    get_inventory_info(alice_inventory)
 
-transaction(alice_inventory, bob_inventory, item, 2)
+    transaction(alice_inventory, bob_inventory, item, 2)
 
-print()
+    print()
 
-most_valuable(alice_inventory, bob_inventory)
+    most_valuable(alice_inventory, bob_inventory)
+
+
+main()
