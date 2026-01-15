@@ -1,7 +1,8 @@
 import math
 
 
-def main():
+def main() -> None:
+    """Demonstrate 3D coordinate parsing and distance calculations."""
     position = tuple([10, 20, 5])
     spawn = tuple([0, 0, 0])
 
@@ -39,7 +40,7 @@ def main():
     print("")
 
     coords = "abc,def,ghi"
-    print(f'Parsing coordinates: "{coords}"')
+    print(f'Parsing invalid coordinates: "{coords}"')
     try:
         position = tuple(int(n) for n in coords.split(","))
 

@@ -1,8 +1,8 @@
 import sys
 
 
-def main():
-
+def main() -> None:
+    """Process and display command line arguments."""
     program_name = sys.argv[0]
     program_len = len(sys.argv)
 
@@ -10,7 +10,7 @@ def main():
 
     if program_len < 2:
         print("No arguments provided!")
-        print(f"program name: {program_name}")
+        print(f"Program name: {program_name}")
         print(f"Total arguments: {program_len}")
     else:
         print(f"Program name: {program_name}")

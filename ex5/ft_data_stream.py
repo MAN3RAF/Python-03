@@ -1,6 +1,8 @@
+from typing import Generator
 
-def game_event_generator(count):
 
+def game_event_generator(count: int) -> Generator[dict, None, None]:
+    """Generate game events for streaming processing."""
     players = ["alice", "bob", "charlie", "frank"]
     actions = [
         "found treasure",
@@ -22,7 +24,8 @@ def game_event_generator(count):
         }
 
 
-def stream_processor(event_stream):
+def stream_processor(event_stream: Generator) -> tuple[int, int, int, int]:
+    """Process event stream and return analytics."""
     hight_level_count = treasure_count = level_up_count = events_count = 0
 
     for event in event_stream:
@@ -40,18 +43,17 @@ def stream_processor(event_stream):
     return hight_level_count, treasure_count, level_up_count, events_count
 
 
-def fibonacci(num):
-
+def fibonacci(num: int) -> Generator[int, None, None]:
+    """Generate Fibonacci sequence."""
     a, b = 0, 1
 
     for _ in range(num):
-
         yield a
         a, b = b, a + b
 
 
-def prime(limit):
-
+def prime(limit: int) -> Generator[int, None, None]:
+    """Generate prime numbers up to limit."""
     num = 2
     count = 0
 
@@ -68,8 +70,8 @@ def prime(limit):
         num += 1
 
 
-def main():
-
+def main() -> None:
+    """Main function to demonstrate data stream processing."""
     print("=== Game Data Stream Processor ===\n")
 
     game_events = 1000

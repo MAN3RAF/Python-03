@@ -1,7 +1,8 @@
 import sys
 
 
-def main():
+def main() -> None:
+    """Analyze and display player score statistics."""
     program_len = len(sys.argv)
     print("=== Player Score Analytics ===")
     if program_len < 2:

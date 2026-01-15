@@ -30,7 +30,8 @@ players = [
 ]
 
 
-def list_comprehensions():
+def list_comprehensions() -> tuple[list, list, list]:
+    """Demonstrate list comprehension examples."""
     high_scores = [p['name'] for p in players if p['score'] > 2000]
     double_scores = [p['score'] * 2 for p in players]
     active_players = [p['name'] for p in players if p['active']]
@@ -38,7 +39,8 @@ def list_comprehensions():
     return high_scores, double_scores, active_players
 
 
-def dict_comprehensions():
+def dict_comprehensions() -> tuple[dict, dict, dict]:
+    """Demonstrate dict comprehension examples."""
     player_scores = {p['name']: p['score'] for p in players}
     score_categories = {
         "high": len([p for p in players if p['score'] > 2100]),
@@ -50,7 +52,8 @@ def dict_comprehensions():
     return player_scores, score_categories, achievement_count
 
 
-def set_comprehensions():
+def set_comprehensions() -> tuple[set, set, set]:
+    """Demonstrate set comprehension examples."""
     unique_players = {p['name'] for p in players}
     unique_achievements = {
         p for player in players for p in player['achievements']
@@ -60,7 +63,8 @@ def set_comprehensions():
     return unique_players, unique_achievements, active_regions
 
 
-def combined_analysis(unique_achievements):
+def combined_analysis(unique_achievements: set) -> tuple[int, int, float, dict]:
+    """Perform combined analysis on player data."""
     total_players = len(players)
     total_unique_achievements = len(unique_achievements)
     score = [p['score'] for p in players]
@@ -71,7 +75,8 @@ def combined_analysis(unique_achievements):
     return total_players, total_unique_achievements, average_score, top_player
 
 
-def main():
+def main() -> None:
+    """Main function to run analytics dashboard."""
     print("=== Game Analytics Dashboard ===\n")
 
     print("=== List Comprehension Examples ===")

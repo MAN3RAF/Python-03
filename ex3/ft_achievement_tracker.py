@@ -1,5 +1,6 @@
 
-def main():
+def main() -> None:
+    """Track and analyze player achievements."""
     alice_achievements = {
         "first_kill",
         "level_10",
