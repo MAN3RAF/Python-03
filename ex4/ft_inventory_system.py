@@ -1,11 +1,13 @@
 import sys
 
-def main():
+
+def main() -> None:
+    """Process inventory from command line arguments and display analytics."""
     if (len(sys.argv) > 2):
 
         args = sys.argv[1:]
         inventory = dict()
-        
+
         for arg in args:
             parts = arg.split(':')
             name = parts[0]
@@ -19,9 +21,7 @@ def main():
         print(f"Total items in inventory: {total_items}")
         print(f"Unique item types: {unique_items}")
 
-        items_list = []
-        for k, v in inventory.items():
-            items_list.append((k, v))
+        items_list = list(inventory.items())
 
         n = len(items_list)
         i = 0
@@ -38,6 +38,7 @@ def main():
         print("\n=== Current Inventory ===")
         for item in items_list:
             name = item[0]
+
             qty = item[1]
             percentage = (qty / total_items) * 100
 
@@ -45,7 +46,7 @@ def main():
                 label = "unit"
             else:
                 label = "units"
-                
+
             print(f"{name}: {qty} {label} ({percentage:.1f}%)")
 
         print("\n=== Inventory Statistics ===")
@@ -53,8 +54,15 @@ def main():
         most_data = items_list[0]
         least_data = items_list[-1]
 
-        m_label = "unit" if most_data[1] == 1 else "units"
-        l_label = "unit" if least_data[1] == 1 else "units"
+        if most_data[1] == 1:
+            m_label = "unit"
+        else:
+            m_label = "units"
+
+        if least_data[1] == 1:
+            l_label = "unit"
+        else:
+            l_label = "units"
 
         print(f"Most abundant: {most_data[0]} ({most_data[1]} {m_label})")
         print(f"Least abundant: {least_data[0]} ({least_data[1]} {l_label})")
@@ -62,13 +70,13 @@ def main():
         print("\n=== Item Categories ===")
         moderate = dict()
         scarce = dict()
-        
+
         for k, v in inventory.items():
             if v > 3:
                 moderate.update({k: v})
             else:
                 scarce.update({k: v})
-                
+
         print(f"Moderate: {moderate}")
         print(f"Scarce: {scarce}")
 
@@ -78,26 +86,25 @@ def main():
         for k, v in inventory.items():
             if v < 2:
                 restock.append(k)
-                
+
         print(f"Restock needed: {restock}")
 
         print("\n=== Dictionary Properties Demo ===")
 
-        keys_list = []
-        for k in inventory.keys():
-            keys_list.append(k)
-            
-        vals_list = []
-        for v in inventory.values():
-            vals_list.append(v)
-            
+        keys_list = list(inventory.keys())
+
+        vals_list = list(inventory.values())
+
         print(f"Dictionary keys: {keys_list}")
         print(f"Dictionary values: {vals_list}")
 
         check = "sword"
 
-        has_sword = inventory.get(check) is not None
-        print(f"Sample lookup - '{check}' in inventory: {has_sword}")
+        has_sword = inventory.get(check)
+        if has_sword:
+            print(f"Sample lookup - '{check}' in inventory: True")
+        else:
+            print(f"Sample lookup - '{check}' in inventory: False")
 
 
 main()

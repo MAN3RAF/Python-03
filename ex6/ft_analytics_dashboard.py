@@ -63,7 +63,8 @@ def set_comprehensions() -> tuple[set, set, set]:
     return unique_players, unique_achievements, active_regions
 
 
-def combined_analysis(unique_achievements: set) -> tuple[int, int, float, dict]:
+def combined_analysis(
+        unique_achievements: set) -> tuple[int, int, float, dict]:
     """Perform combined analysis on player data."""
     total_players = len(players)
     total_unique_achievements = len(unique_achievements)
@@ -103,7 +104,7 @@ def main() -> None:
     print(f"Total unique achievements: {u_achievements}")
     print(f"Average score: {average}")
     print(
-        f"Top performer: {top['name']} ({top["score"]} points, "
+        f"Top performer: {top['name']} ({top['score']} points, "
         f"{len(top['achievements'])} achievements)"
     )
 
